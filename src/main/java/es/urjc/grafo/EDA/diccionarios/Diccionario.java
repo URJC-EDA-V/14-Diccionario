@@ -5,6 +5,8 @@ import es.urjc.grafo.EDA.mapas.MapaEncadenamientoSeparado;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * A dictionary behaves similarly to a map, but allows multiple entries with the same key.
@@ -19,7 +21,7 @@ public class Diccionario<K, V> extends MapaEncadenamientoSeparado<K, V> implemen
      * Si ya existe una entrada con la clave dada, se añade una nueva entrada sin eliminar la anterior.
      * El valor devuelto es siempre null y se puede ignorar.
      * En realidad, este método no necesita devolver nada.
-     * Sin embargo, por no sobrecomplicar la jerarquía de clases,
+     * Sin embargo, por no complicar la jerarquía de clases,
      * se mantiene el mismo prototipo que en la interfaz Mapa
      * y aprovechamos la implementación de MapaEncadenamientoSeparado.
      *
@@ -66,7 +68,7 @@ public class Diccionario<K, V> extends MapaEncadenamientoSeparado<K, V> implemen
      */
     public Iterable<V> removeAll(K key) {
         // TODO
-        throw new UnsupportedOperationException("Not implemented yet");
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /**
@@ -78,7 +80,7 @@ public class Diccionario<K, V> extends MapaEncadenamientoSeparado<K, V> implemen
     @Override
     public Iterable<V> getAll(K key) {
         // TODO
-        throw new UnsupportedOperationException("Not implemented yet");
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -88,35 +90,43 @@ public class Diccionario<K, V> extends MapaEncadenamientoSeparado<K, V> implemen
 
     private class BucketKeyValuesIterable implements Iterable<V> {
 
-        private final BucketKeyValuesIterator keyIterator;
+        private final ArrayList<MapEntry<K, V>> bucket;
+        private final K key;
 
         public BucketKeyValuesIterable(ArrayList<MapEntry<K, V>> bucket, K key) {
-            this.keyIterator = new BucketKeyValuesIterator(bucket, key);
+            this.bucket = bucket;
+            this.key = key;
         }
 
         @Override
         public Iterator<V> iterator() {
-            return this.keyIterator;
+            return new BucketKeyValuesIterator(bucket, key);
         }
     }
 
     private class BucketKeyValuesIterator implements Iterator<V> {
 
+        // TODO
+
         public BucketKeyValuesIterator(ArrayList<MapEntry<K, V>> bucket, K key) {
             // TODO
-            throw new UnsupportedOperationException("Not implemented yet");
+            throw new UnsupportedOperationException("Not supported yet.");
         }
 
         @Override
         public boolean hasNext() {
             // TODO
-            throw new UnsupportedOperationException("Not implemented yet");
+            throw new UnsupportedOperationException("Not supported yet.");
         }
 
         @Override
         public V next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+
             // TODO
-            throw new UnsupportedOperationException("Not implemented yet");
+            throw new UnsupportedOperationException("Not supported yet.");
         }
     }
 
