@@ -58,12 +58,12 @@ public class ConjuntoTablaHash<K> implements Conjunto<K> {
         }
 
         if (table[index] == null) {
-            table[index] = new ArrayList<>();
+            table[index] = new LinkedList<>();
         }
         table[index].add(key);
         size++;
 
-        if (size > table.length * MAX_LOAD_FACTOR) {
+        if (((float) size / table.length) > MAX_LOAD_FACTOR) {
             resize();
         }
         return true;
@@ -158,11 +158,6 @@ public class ConjuntoTablaHash<K> implements Conjunto<K> {
                 throw new NoSuchElementException();
             }
             return bucketIterator.next();
-        }
-
-        @Override
-        public void remove() {
-            throw new UnsupportedOperationException();
         }
 
         private void advanceToNextBucket() {
